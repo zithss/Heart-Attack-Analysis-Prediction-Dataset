@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Ghazi Athari" />
+
+<meta name="date" content="2024-06-22" />
+
+<title>AoL Data Mining and Visualization</title>
+
+<script src="Developing-Report-with-RMarkdown_files/header-attrs-2.29/header-attrs.js"></script>
+<script src="Developing-Report-with-RMarkdown_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="Developing-Report-with-RMarkdown_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="Developing-Report-with-RMarkdown_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="Developing-Report-with-RMarkdown_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="Developing-Report-with-RMarkdown_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="Developing-Report-with-RMarkdown_files/navigation-1.1/tabsets.js"></script>
+<link href="Developing-Report-with-RMarkdown_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="Developing-Report-with-RMarkdown_files/highlightjs-9.12.0/highlight.js"></script>
+<link href="Developing-Report-with-RMarkdown_files/htmltools-fill-0.5.8/fill.css" rel="stylesheet" />
+<script src="Developing-Report-with-RMarkdown_files/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="Developing-Report-with-RMarkdown_files/plotly-binding-4.10.4/plotly.js"></script>
+<script src="Developing-Report-with-RMarkdown_files/typedarray-0.1/typedarray.min.js"></script>
+<link href="Developing-Report-with-RMarkdown_files/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="Developing-Report-with-RMarkdown_files/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="Developing-Report-with-RMarkdown_files/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="Developing-Report-with-RMarkdown_files/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">AoL Data Mining and Visualization</h1>
+<h4 class="author">Ghazi Athari</h4>
+<h4 class="date">2024-06-22</h4>
+
+</div>
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>Globally, approximately <strong>17.9 million people die from heart
+attacks</strong> each year, making it <em>one of the leading causes of
+death worldwide</em>. This staggering number represents 4% of all
+deaths, equating to roughly 1 in every 25 deaths. The urgency is
+underscored by the statistic that for individuals who do not receive
+prompt stenting (percutaneous coronary intervention or PCI), <em>the
+death rate increases dramatically by 3.3 deaths per 100 every 10
+minutes</em>. This highlights the critical need for timely medical
+intervention and the importance of early detection and preventive
+measures.</p>
+<p>Our analysis aims to identify early signs of heart problems, thereby
+increasing preparation time for patients and reducing the risk of fatal
+heart attacks. Early detection can lead to timely treatment and
+lifestyle changes, crucial in preventing severe cardiac events. This
+effort aligns with the third goal of the <strong>Sustainable Development
+Goals (SDG)</strong>, which seeks to ensure healthy lives and promote
+well-being for all ages. By focusing on heart disease, we contribute to
+achieving this goal, addressing the significant global burden of
+cardiovascular diseases.</p>
+<p>To conduct this analysis, we utilize the <strong>“Heart Attack
+Analysis &amp; Prediction Dataset”</strong> by Rashik Rahman, available
+on Kaggle. This comprehensive dataset includes variables related to
+heart health, such as age, sex, cholesterol levels, blood pressure, and
+other key indicators of cardiovascular risk. Our methods involve
+<strong>Exploratory Data Analysis (EDA)</strong> to understand the
+dataset and uncover initial patterns. with EDA, we can identify
+<em>significant predictors of heart attacks</em>.</p>
+<p>Our research also underscores the importance of <em>public health
+initiatives focused on heart disease prevention and education</em>.
+Increasing awareness of the risk factors and symptoms of heart disease
+can empower individuals to seek medical advice and adopt healthier
+lifestyles, contributing to a broader reduction in heart attack
+incidence and improving overall population health.</p>
+</div>
+<div id="data-description" class="section level1">
+<h1>Data Description</h1>
+<ol style="list-style-type: decimal">
+<li>Age: The patient’s age.</li>
+<li>Sex: The patient’s gender</li>
+</ol>
+<ul>
+<li>0: female</li>
+<li>1: male</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>ChestPainType: Chest Pain Types</li>
+</ol>
+<ul>
+<li>0: Typical Angina</li>
+<li>1: Atypical Angina</li>
+<li>2: Non-Anginal Pain</li>
+<li>3: Asymptomatic</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>RestBloodPressure: Resting Blood Pressure</li>
+<li>Cholesterol: Serum Cholesterol Levels</li>
+<li>FastingBloodSugar: Fasting Blood Sugar</li>
+</ol>
+<ul>
+<li>0: &lt;= 120 mg/dL</li>
+<li>1: &gt; 120 mg/dL</li>
+</ul>
+<ol start="7" style="list-style-type: decimal">
+<li>RestECG: Resting ECG Results</li>
+</ol>
+<ul>
+<li>0: Normal</li>
+<li>1: ST-T Wave Abnormality</li>
+<li>2: Probable or Definite Left Ventricular Hypertrophy</li>
+</ul>
+<ol start="8" style="list-style-type: decimal">
+<li>MaxHeartExercise: Maximum Heart Rate During Exercise</li>
+<li>ExerciseAngina: Exercise-Induced Angina</li>
+</ol>
+<ul>
+<li>0: No</li>
+<li>1: Yes</li>
+</ul>
+<ol start="10" style="list-style-type: decimal">
+<li>SegmentDepression: ST-Segment Depression</li>
+<li>SegmentSlope: Slope of ST Segment</li>
+</ol>
+<ul>
+<li>0: Downsloping</li>
+<li>1: Flat</li>
+<li>2: Upsloping diagnosis</li>
+</ul>
+<ol start="12" style="list-style-type: decimal">
+<li>MajorVesselsColored: Number of Major Vessels Colored by Fluoroscopy
+(CAA)</li>
+<li>ThalasemmiaType: Thalassemia Type</li>
+</ol>
+<ul>
+<li>0: None (Normal)</li>
+<li>1: Fixed Defect</li>
+<li>2: Reversible Defect</li>
+<li>3: Thalassemia</li>
+</ul>
+<ol start="14" style="list-style-type: decimal">
+<li>HeartAttack: Risk of Heart Attack</li>
+</ol>
+<ul>
+<li>0: No</li>
+<li>1: Yes</li>
+</ul>
+</div>
+<div id="data-preprocessing" class="section level1">
+<h1>Data Preprocessing</h1>
+<p>We preprocessed the data starting from changing the variables’ names
+to make the data more readable. Then, we changed some variables’
+datatypes into categorical. Next we see if the dataset have any missing
+values with a code from <a
+href="https://www.projectpro.io/recipes/find-count-of-missing-values-dataframe">ProjectPro</a>.</p>
+<pre class="r"><code>missing &lt;- is.na(data)
+count &lt;- colSums(missing)
+print(count)</code></pre>
+<pre><code>##                 Age                 Sex       ChestPainType   RestBloodPressure 
+##                   0                   0                   0                   0 
+##         Cholesterol   FastingBloodSugar             RestECG    MaxHeartExercise 
+##                   0                   0                   0                   0 
+##      ExerciseAngina   SegmentDepression        SegmentSlope MajorVesselsColored 
+##                   0                   0                   0                   0 
+##     ThalassemiaType         HeartAttack 
+##                   0                   0</code></pre>
+<p>Our dataset doesn’t have any missing values. We can continue to
+preprocess the dataset by searching for duplicate values with a code
+from <a
+href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/duplicated">rdocumentation.org</a></p>
+<pre class="r"><code>duplicate &lt;- duplicated(data)
+duplicate_rows &lt;- data[duplicate, ]
+print(duplicate_rows)</code></pre>
+<p>From running that code, we have one duplicate values. We can remove
+the duplicate with this code.</p>
+<pre class="r"><code>data_fixed &lt;- data %&gt;% distinct() </code></pre>
+</div>
+<div id="data-exploration" class="section level1">
+<h1>Data Exploration</h1>
+<p>Now that our data is clean and preprocessed, let’s see the
+categorical variables’ barplots look like</p>
+<p><img src="Developing-Report-with-RMarkdown_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Here, most of the categorical features are imbalanced.</p>
+<p>Next, We’ll see the numerical ones</p>
+<p><img src="Developing-Report-with-RMarkdown_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Looks like there are several outliers, but since there’s not a lot of
+outliers and the outliers follow the data trend, we can leave them
+be.</p>
+<p>Now let’s see if out numerical data are correlating to eachother</p>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-d5baea8ccaa1d82b6410" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-d5baea8ccaa1d82b6410">{"x":{"data":[{"x":[2.0625,1,null,1,1,null,2.0625,3.125,null,3.125,3.125,null,3.125,2,null,2,2,null,3.125,4.25,null,4.25,4.25,null,4.25,3.5,null,3.5,3.5,null,3.5,3,null,3,3,null,3.5,4,null,4,4,null,4.25,5,null,5,5],"y":[2.0916923665122442,2.0916923665122442,null,2.0916923665122442,0,null,2.0916923665122442,2.0916923665122442,null,2.0916923665122442,1.380816578540123,null,1.380816578540123,1.380816578540123,null,1.380816578540123,0,null,1.380816578540123,1.380816578540123,null,1.380816578540123,1.1831731432588173,null,1.1831731432588173,1.1831731432588173,null,1.1831731432588173,1.082092206813172,null,1.082092206813172,1.082092206813172,null,1.082092206813172,0,null,1.082092206813172,1.082092206813172,null,1.082092206813172,0,null,1.1831731432588173,1.1831731432588173,null,1.1831731432588173,0],"text":["y: 2.091692","y: 2.091692",null,"y: 2.091692","y: 2.091692",null,"y: 2.091692","y: 2.091692",null,"y: 2.091692","y: 2.091692",null,"y: 1.380817","y: 1.380817",null,"y: 1.380817","y: 1.380817",null,"y: 1.380817","y: 1.380817",null,"y: 1.380817","y: 1.380817",null,"y: 1.183173","y: 1.183173",null,"y: 1.183173","y: 1.183173",null,"y: 1.082092","y: 1.082092",null,"y: 1.082092","y: 1.082092",null,"y: 1.082092","y: 1.082092",null,"y: 1.082092","y: 1.082092",null,"y: 1.183173","y: 1.183173",null,"y: 1.183173","y: 1.183173"],"type":"scatter","mode":"lines","line":{"width":2.2677165354330708,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2.0625,1,3.125,2,4.25,3.5,3,4,5],"y":[2.0916923665122442,0,1.380816578540123,0,1.1831731432588173,1.082092206813172,0,0,0],"text":["y: 2.091692","y: 0.000000","y: 1.380817","y: 0.000000","y: 1.183173","y: 1.082092","y: 0.000000","y: 0.000000","y: 0.000000"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"transparent","opacity":1,"size":null,"symbol":null,"line":{"width":1.8897637795275593,"color":"transparent"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"type":"scatter","mode":"markers","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"line":{"color":"rgba(44,160,44,1)"},"xaxis":"x2","yaxis":"y","frame":null},{"x":[1,2,3,4,5],"y":[1,2,3,4,5],"z":[[1,0.27785198707746722,0,0.25156860281061699,0.038851725291740143],[0.27785198707746722,1,0.43774779500643929,0.37303393706813337,0.32353719006794113],[0,0.43774779500643929,1,0.48470662218791277,0.43512689282322958],[0.25156860281061699,0.37303393706813337,0.48470662218791277,1,0.42311700260176988],[0.038851725291740143,0.32353719006794113,0.43512689282322958,0.42311700260176988,1]],"text":[["row: MaxHeartExercise<br>column: MaxHeartExercise<br>value:  1.00000","row: MaxHeartExercise<br>column: Cholesterol<br>value: -0.00994","row: MaxHeartExercise<br>column: Age<br>value: -0.39852","row: MaxHeartExercise<br>column: RestBloodPressure<br>value: -0.04670","row: MaxHeartExercise<br>column: SegmentDepression<br>value: -0.34419"],["row: Cholesterol<br>column: MaxHeartExercise<br>value: -0.00994","row: Cholesterol<br>column: Cholesterol<br>value:  1.00000","row: Cholesterol<br>column: Age<br>value:  0.21368","row: Cholesterol<br>column: RestBloodPressure<br>value:  0.12317","row: Cholesterol<br>column: SegmentDepression<br>value:  0.05395"],["row: Age<br>column: MaxHeartExercise<br>value: -0.39852","row: Age<br>column: Cholesterol<br>value:  0.21368","row: Age<br>column: Age<br>value:  1.00000","row: Age<br>column: RestBloodPressure<br>value:  0.27935","row: Age<br>column: SegmentDepression<br>value:  0.21001"],["row: RestBloodPressure<br>column: MaxHeartExercise<br>value: -0.04670","row: RestBloodPressure<br>column: Cholesterol<br>value:  0.12317","row: RestBloodPressure<br>column: Age<br>value:  0.27935","row: RestBloodPressure<br>column: RestBloodPressure<br>value:  1.00000","row: RestBloodPressure<br>column: SegmentDepression<br>value:  0.19322"],["row: SegmentDepression<br>column: MaxHeartExercise<br>value: -0.34419","row: SegmentDepression<br>column: Cholesterol<br>value:  0.05395","row: SegmentDepression<br>column: Age<br>value:  0.21001","row: SegmentDepression<br>column: RestBloodPressure<br>value:  0.19322","row: SegmentDepression<br>column: SegmentDepression<br>value:  1.00000"]],"colorscale":[[0,"#008B8B"],[0.038851725291740143,"#149393"],[0.25156860281061699,"#80C4C4"],[0.27785198707746722,"#8DCBCB"],[0.32353719006794113,"#A5D6D6"],[0.37303393706813337,"#BEE2E2"],[0.42311700260176988,"#D7EDED"],[0.43512689282322958,"#DDEFEF"],[0.43774779500643929,"#DFF0F0"],[0.48470662218791277,"#F7FBFB"],[1,"#000080"]],"type":"heatmap","showscale":false,"autocolorscale":false,"showlegend":false,"xaxis":"x","yaxis":"y2","hoverinfo":"text","frame":null},{"x":[1],"y":[1],"name":"5311489ea6e85801707fd39877044858","type":"scatter","mode":"markers","opacity":0,"hoverinfo":"skip","showlegend":false,"marker":{"color":[0,1],"colorscale":[[0,"#008B8B"],[0.0033444816053511506,"#028C8C"],[0.006688963210702341,"#048C8C"],[0.010033444816053531,"#068D8D"],[0.013377926421404682,"#078E8E"],[0.016722408026755831,"#098F8F"],[0.020066889632107024,"#0B8F8F"],[0.023411371237458213,"#0D9090"],[0.026755852842809364,"#0F9191"],[0.030100334448160515,"#109191"],[0.033444816053511704,"#129292"],[0.036789297658862893,"#139393"],[0.040133779264214048,"#149494"],[0.043478260869565195,"#169494"],[0.046822742474916385,"#189595"],[0.050167224080267581,"#1A9696"],[0.053511705685618728,"#1C9797"],[0.056856187290969876,"#1E9898"],[0.060200668896321072,"#209898"],[0.063545150501672254,"#219999"],[0.066889632107023408,"#239A9A"],[0.070234113712374563,"#249B9B"],[0.073578595317725745,"#269C9C"],[0.076923076923076941,"#279C9C"],[0.080267558528428096,"#299D9D"],[0.083612040133779236,"#2A9E9E"],[0.086956521739130432,"#2C9F9F"],[0.090301003344481628,"#2EA0A0"],[0.093645484949832769,"#30A0A0"],[0.096989966555183924,"#31A1A1"],[0.10033444816053512,"#33A2A2"],[0.1036789297658863,"#35A3A3"],[0.10702341137123746,"#37A4A4"],[0.11036789297658862,"#38A4A4"],[0.11371237458193979,"#3AA5A5"],[0.11705685618729096,"#3BA6A6"],[0.12040133779264214,"#3DA7A7"],[0.12374581939799331,"#3EA8A8"],[0.12709030100334448,"#40A8A8"],[0.13043478260869565,"#42A9A9"],[0.13377926421404682,"#44AAAA"],[0.13712374581939799,"#46ABAB"],[0.14046822742474915,"#48ABAB"],[0.14381270903010032,"#49ACAC"],[0.14715719063545149,"#4BADAD"],[0.15050167224080269,"#4DAEAD"],[0.15384615384615385,"#4FAEAE"],[0.15719063545150502,"#50AFAF"],[0.16053511705685619,"#52B0B0"],[0.16387959866220736,"#54B0B0"],[0.16722408026755853,"#55B1B1"],[0.1705685618729097,"#57B2B2"],[0.17391304347826086,"#59B3B3"],[0.17725752508361203,"#5BB4B4"],[0.1806020066889632,"#5CB4B4"],[0.1839464882943144,"#5EB5B5"],[0.18729096989966554,"#60B6B6"],[0.19063545150501671,"#61B7B7"],[0.1939799331103679,"#63B8B8"],[0.19732441471571907,"#65B8B8"],[0.20066889632107024,"#66B9B9"],[0.20401337792642138,"#68BABA"],[0.20735785953177258,"#6ABBBB"],[0.21070234113712377,"#6BBCBC"],[0.21404682274247491,"#6DBCBC"],[0.21739130434782605,"#6FBDBD"],[0.22073578595317725,"#70BEBE"],[0.22408026755852845,"#72BEBE"],[0.22742474916387959,"#74BFBF"],[0.23076923076923075,"#75C0C0"],[0.23411371237458192,"#77C1C1"],[0.23745819397993312,"#79C1C1"],[0.24080267558528429,"#7AC2C2"],[0.24414715719063543,"#7CC3C3"],[0.24749163879598662,"#7EC3C3"],[0.25083612040133779,"#7FC4C4"],[0.25418060200668896,"#81C5C5"],[0.25752508361204013,"#83C6C6"],[0.2608695652173913,"#85C7C7"],[0.26421404682274247,"#86C7C7"],[0.26755852842809363,"#88C8C8"],[0.2709030100334448,"#8AC9C9"],[0.27424749163879597,"#8BCACA"],[0.27759197324414719,"#8DCBCB"],[0.28093645484949831,"#8FCBCB"],[0.28428093645484948,"#90CCCC"],[0.28762541806020064,"#92CDCD"],[0.29096989966555187,"#94CECE"],[0.29431438127090298,"#95CFCF"],[0.29765886287625415,"#97CFCF"],[0.30100334448160537,"#99D0D0"],[0.30434782608695654,"#9BD1D1"],[0.30769230769230771,"#9DD2D2"],[0.31103678929765882,"#9ED3D3"],[0.31438127090301005,"#A0D3D3"],[0.31772575250836121,"#A2D4D4"],[0.32107023411371238,"#A4D5D5"],[0.3244147157190635,"#A5D6D6"],[0.32775919732441472,"#A7D7D7"],[0.33110367892976589,"#A9D7D7"],[0.33444816053511706,"#ABD8D8"],[0.33779264214046822,"#ACD9D9"],[0.34113712374581939,"#AEDADA"],[0.34448160535117056,"#B0DBDB"],[0.34782608695652173,"#B1DBDB"],[0.3511705685618729,"#B3DCDC"],[0.35451505016722407,"#B5DDDD"],[0.35785953177257529,"#B6DEDE"],[0.3612040133779264,"#B8DFDF"],[0.36454849498327757,"#BADFDF"],[0.3678929765886288,"#BBE0E0"],[0.37123745819397996,"#BDE1E1"],[0.37458193979933108,"#BFE2E2"],[0.37792642140468224,"#C0E3E3"],[0.38127090301003341,"#C2E3E3"],[0.38461538461538464,"#C4E4E4"],[0.38795986622073581,"#C6E5E5"],[0.39130434782608692,"#C7E6E6"],[0.39464882943143814,"#C9E6E6"],[0.39799331103678931,"#CBE7E7"],[0.40133779264214048,"#CCE8E8"],[0.40468227424749159,"#CEE8E8"],[0.40802675585284276,"#D0E9E9"],[0.41137123745819398,"#D1EAEA"],[0.41471571906354515,"#D3EBEB"],[0.41806020066889632,"#D5EBEB"],[0.42140468227424754,"#D6ECEC"],[0.42474916387959866,"#D8EDED"],[0.42809364548494983,"#DAEEEE"],[0.43143812709030099,"#DBEFEF"],[0.43478260869565211,"#DDEFEF"],[0.43812709030100333,"#DFF0F0"],[0.4414715719063545,"#E1F1F1"],[0.44481605351170567,"#E2F2F2"],[0.44816053511705689,"#E4F3F3"],[0.45150501672240806,"#E6F3F3"],[0.45484949832775917,"#E7F4F4"],[0.45819397993311034,"#E9F5F5"],[0.46153846153846151,"#EBF6F6"],[0.46488294314381273,"#ECF7F7"],[0.46822742474916385,"#EEF7F7"],[0.47157190635451501,"#F0F8F8"],[0.47491638795986624,"#F2F9F9"],[0.47826086956521741,"#F4FAFA"],[0.48160535117056857,"#F5FBFB"],[0.48494983277591969,"#F7FBFB"],[0.48829431438127086,"#F9FCFC"],[0.49163879598662208,"#FBFDFD"],[0.49498327759197325,"#FCFEFE"],[0.49832775919732436,"#FEFFFF"],[0.50167224080267558,"#FEFEFF"],[0.50501672240802675,"#FCFCFE"],[0.50836120401337792,"#FBFBFD"],[0.51170568561872909,"#F9F9FC"],[0.51505016722408026,"#F7F7FB"],[0.51839464882943143,"#F5F5FA"],[0.52173913043478259,"#F4F3F9"],[0.52508361204013376,"#F2F2F8"],[0.52842809364548493,"#F0F0F7"],[0.5317725752508361,"#EEEEF7"],[0.53511705685618727,"#ECECF6"],[0.53846153846153844,"#EBEBF5"],[0.5418060200668896,"#E9E9F4"],[0.54515050167224077,"#E7E7F3"],[0.54849498327759194,"#E6E6F2"],[0.55183946488294311,"#E4E4F1"],[0.55518394648829439,"#E2E2F0"],[0.55852842809364545,"#E0E0F0"],[0.56187290969899661,"#DFDFEF"],[0.56521739130434778,"#DDDDEE"],[0.56856187290969895,"#DBDBED"],[0.57190635451505023,"#DADAEC"],[0.57525083612040129,"#D8D8EB"],[0.57859531772575246,"#D6D6EA"],[0.58193979933110374,"#D5D5E9"],[0.5852842809364549,"#D3D3E9"],[0.58862876254180596,"#D1D1E8"],[0.59197324414715713,"#D0D0E7"],[0.5953177257525083,"#CECEE6"],[0.59866220735785958,"#CCCCE5"],[0.60200668896321075,"#CBCBE5"],[0.6053511705685618,"#C9C9E4"],[0.60869565217391308,"#C7C7E3"],[0.61204013377926425,"#C6C5E2"],[0.61538461538461542,"#C4C4E1"],[0.61872909698996648,"#C2C2E1"],[0.62207357859531764,"#C0C0E0"],[0.62541806020066892,"#BFBFDF"],[0.62876254180602009,"#BDBDDE"],[0.63210702341137126,"#BBBBDD"],[0.63545150501672243,"#BABADC"],[0.6387959866220736,"#B8B8DB"],[0.64214046822742477,"#B6B6DA"],[0.64548494983277593,"#B5B5DA"],[0.64882943143812699,"#B3B3D9"],[0.65217391304347827,"#B1B1D8"],[0.65551839464882944,"#B0B0D7"],[0.65886287625418061,"#AEAED6"],[0.66220735785953178,"#ACACD5"],[0.66555183946488294,"#ABABD4"],[0.66889632107023411,"#A9A9D3"],[0.67224080267558528,"#A7A7D3"],[0.67558528428093645,"#A5A5D2"],[0.67892976588628762,"#A4A3D1"],[0.68227424749163879,"#A2A2D0"],[0.68561872909698995,"#A0A0CF"],[0.68896321070234112,"#9E9ECF"],[0.69230769230769229,"#9D9CCE"],[0.69565217391304346,"#9B9BCD"],[0.69899665551839463,"#9999CC"],[0.7023411371237458,"#9797CB"],[0.70568561872909696,"#9595CB"],[0.70903010033444813,"#9494CA"],[0.7123745819397993,"#9292C9"],[0.71571906354515058,"#9090C8"],[0.71906354515050164,"#8F8FC7"],[0.72240802675585281,"#8D8DC6"],[0.72575250836120409,"#8B8BC5"],[0.72909698996655514,"#8A89C5"],[0.73244147157190631,"#8888C4"],[0.73578595317725759,"#8686C3"],[0.73913043478260865,"#8584C2"],[0.74247491638795993,"#8383C1"],[0.74581939799331098,"#8181C0"],[0.74916387959866215,"#7F7FBF"],[0.75250836120401343,"#7E7EBE"],[0.75585284280936449,"#7C7CBD"],[0.75919732441471577,"#7A7ABD"],[0.76254180602006683,"#7979BC"],[0.76588628762541799,"#7777BB"],[0.76923076923076927,"#7575BA"],[0.77257525083612033,"#7474B9"],[0.77591973244147161,"#7272B8"],[0.77926421404682278,"#7070B7"],[0.78260869565217384,"#6F6FB6"],[0.78595317725752512,"#6D6DB6"],[0.78929765886287628,"#6B6BB5"],[0.79264214046822734,"#6A6AB4"],[0.79598662207357862,"#6868B3"],[0.79933110367892968,"#6666B2"],[0.80267558528428096,"#6564B1"],[0.80602006688963213,"#6363B1"],[0.80936454849498318,"#6161B0"],[0.81270903010033446,"#605FAF"],[0.81605351170568552,"#5E5EAE"],[0.8193979933110368,"#5C5CAD"],[0.82274247491638797,"#5B5AAD"],[0.82608695652173902,"#5959AC"],[0.8294314381270903,"#5757AB"],[0.83277591973244147,"#5555AA"],[0.83612040133779264,"#5454A9"],[0.83946488294314381,"#5252A8"],[0.84280936454849509,"#5050A8"],[0.84615384615384615,"#4F4EA7"],[0.84949832775919731,"#4D4CA6"],[0.85284280936454837,"#4B4BA5"],[0.85618729096989965,"#4949A4"],[0.85953177257525093,"#4847A3"],[0.86287625418060199,"#4645A2"],[0.86622073578595316,"#4444A1"],[0.86956521739130421,"#4242A0"],[0.87290969899665549,"#4040A0"],[0.87625418060200666,"#3E3E9F"],[0.87959866220735783,"#3D3D9E"],[0.882943143812709,"#3B3B9D"],[0.88628762541806028,"#3A399C"],[0.88963210702341133,"#38389B"],[0.8929765886287625,"#37369B"],[0.89632107023411378,"#35349A"],[0.89966555183946484,"#333399"],[0.90301003344481612,"#323198"],[0.90635451505016718,"#302F97"],[0.90969899665551834,"#2E2E97"],[0.91304347826086962,"#2C2C96"],[0.91638795986622068,"#2A2A95"],[0.91973244147157196,"#292994"],[0.92307692307692302,"#272793"],[0.92642140468227419,"#262592"],[0.92976588628762546,"#242492"],[0.93311036789297652,"#232291"],[0.93645484949832769,"#212090"],[0.93979933110367897,"#201F8F"],[0.94314381270903003,"#1E1D8E"],[0.94648829431438131,"#1C1B8D"],[0.94983277591973247,"#1A1A8C"],[0.95317725752508353,"#18188B"],[0.95652173913043481,"#16168A"],[0.95986622073578587,"#14148A"],[0.96321070234113715,"#131389"],[0.96655518394648832,"#121188"],[0.96989966555183937,"#101087"],[0.97324414715719065,"#0F0E86"],[0.97658862876254171,"#0D0C86"],[0.97993311036789299,"#0B0A85"],[0.98327759197324416,"#0A0884"],[0.98662207357859522,"#080783"],[0.98996655518394649,"#060582"],[0.99331103678929766,"#040382"],[0.99665551839464872,"#020281"],[1,"#000080"]],"colorbar":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"thickness":23.039999999999996,"title":null,"titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"tickmode":"array","ticktext":["0.0","0.5","1.0"],"tickvals":[0.28567617758953323,0.64200475546143321,0.99833333333333329],"tickfont":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"ticklen":2,"len":0.5}},"xaxis":"x","yaxis":"y2","frame":null},{"x":[1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4,5,5,5,5,5],"y":[1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5],"text":["1","-0.01","-0.4","-0.05","-0.34","-0.01","1","0.21","0.12","0.05","-0.4","0.21","1","0.28","0.21","-0.05","0.12","0.28","1","0.19","-0.34","0.05","0.21","0.19","1"],"customdata":[1,-0.0099398386426982274,-0.39852193812106751,-0.046697728147954337,-0.34418694796671578,-0.0099398386426982274,1,0.21367795655956184,0.12317420653239072,0.053951919986993779,-0.39852193812106751,0.21367795655956184,1,0.27935090656128836,0.2100125673586736,-0.046697728147954337,0.12317420653239072,0.27935090656128836,1,0.19321647240953654,-0.34418694796671578,0.053951919986993779,0.2100125673586736,0.19321647240953654,1],"type":"scatter","mode":"text","textposition":["middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right","middle right"],"hovertemplate":["row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>"],"showlegend":false,"textfont":{"color":["rgba(255,255,255,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(255,255,255,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(255,255,255,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(255,255,255,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(255,255,255,1)"],"size":12},"marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"line":{"color":"rgba(140,86,75,1)"},"xaxis":"x","yaxis":"y2","frame":null},{"x":[2.0916923665122442,2.0916923665122442,null,2.0916923665122442,0,null,2.0916923665122442,2.0916923665122442,null,2.0916923665122442,1.380816578540123,null,1.380816578540123,1.380816578540123,null,1.380816578540123,0,null,1.380816578540123,1.380816578540123,null,1.380816578540123,1.1831731432588173,null,1.1831731432588173,1.1831731432588173,null,1.1831731432588173,1.082092206813172,null,1.082092206813172,1.082092206813172,null,1.082092206813172,0,null,1.082092206813172,1.082092206813172,null,1.082092206813172,0,null,1.1831731432588173,1.1831731432588173,null,1.1831731432588173,0],"y":[2.0625,1,null,1,1,null,2.0625,3.125,null,3.125,3.125,null,3.125,2,null,2,2,null,3.125,4.25,null,4.25,4.25,null,4.25,3.5,null,3.5,3.5,null,3.5,3,null,3,3,null,3.5,4,null,4,4,null,4.25,5,null,5,5],"text":["y: 2.091692","y: 2.091692",null,"y: 2.091692","y: 2.091692",null,"y: 2.091692","y: 2.091692",null,"y: 2.091692","y: 2.091692",null,"y: 1.380817","y: 1.380817",null,"y: 1.380817","y: 1.380817",null,"y: 1.380817","y: 1.380817",null,"y: 1.380817","y: 1.380817",null,"y: 1.183173","y: 1.183173",null,"y: 1.183173","y: 1.183173",null,"y: 1.082092","y: 1.082092",null,"y: 1.082092","y: 1.082092",null,"y: 1.082092","y: 1.082092",null,"y: 1.082092","y: 1.082092",null,"y: 1.183173","y: 1.183173",null,"y: 1.183173","y: 1.183173"],"type":"scatter","mode":"lines","line":{"width":2.2677165354330708,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x2","yaxis":"y2","hoverinfo":"text","frame":null},{"x":[2.0916923665122442,0,1.380816578540123,0,1.1831731432588173,1.082092206813172,0,0,0],"y":[2.0625,1,3.125,2,4.25,3.5,3,4,5],"text":["y: 2.091692","y: 0.000000","y: 1.380817","y: 0.000000","y: 1.183173","y: 1.082092","y: 0.000000","y: 0.000000","y: 0.000000"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"transparent","opacity":1,"size":null,"symbol":null,"line":{"width":1.8897637795275593,"color":"transparent"}},"hoveron":"points","showlegend":false,"xaxis":"x2","yaxis":"y2","hoverinfo":"text","frame":null}],"layout":{"xaxis":{"domain":[0,0.80000000000000004],"automargin":true,"type":"linear","autorange":false,"range":[0.5,5.5],"tickmode":"array","ticktext":["MaxHeartExercise","Cholesterol","Age","RestBloodPressure","SegmentDepression"],"tickvals":[1,2,3,4,5],"categoryorder":"array","categoryarray":["MaxHeartExercise","Cholesterol","Age","RestBloodPressure","SegmentDepression"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":13.283520132835198},"tickangle":-45,"showline":true,"linecolor":"rgba(0,0,0,1)","linewidth":0.66417600664176002,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y2","title":"","hoverformat":".2f"},"xaxis2":{"domain":[0.80000000000000004,1],"automargin":true,"showticklabels":false,"showgrid":false,"zeroline":false,"anchor":"y2","type":"linear","autorange":false,"range":[0,2.0916923665122442],"tickmode":"array","ticktext":["0.0","0.5","1.0","1.5","2.0"],"tickvals":[0,0.5,1,1.5,2],"categoryorder":"array","categoryarray":["0.0","0.5","1.0","1.5","2.0"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"tickfont":{"color":null,"family":null,"size":0},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"gridcolor":null,"gridwidth":0,"title":{"text":"","font":{"color":null,"family":null,"size":0}},"hoverformat":".2f"},"yaxis2":{"domain":[0,0.80000000000000004],"automargin":true,"type":"linear","autorange":false,"range":[0.5,5.5],"tickmode":"array","ticktext":["MaxHeartExercise","Cholesterol","Age","RestBloodPressure","SegmentDepression"],"tickvals":[1,2,3,4,5],"categoryorder":"array","categoryarray":["MaxHeartExercise","Cholesterol","Age","RestBloodPressure","SegmentDepression"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":13.283520132835205},"tickangle":-0,"showline":true,"linecolor":"rgba(0,0,0,1)","linewidth":0.66417600664176002,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":"","hoverformat":".2f"},"yaxis":{"domain":[0.80000000000000004,1],"automargin":true,"showticklabels":false,"showgrid":false,"zeroline":false,"anchor":"x","type":"linear","autorange":false,"range":[0,2.0916923665122442],"tickmode":"array","ticktext":["0.0","0.5","1.0","1.5","2.0"],"tickvals":[0,0.5,1,1.5,2],"categoryorder":"array","categoryarray":["0.0","0.5","1.0","1.5","2.0"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"tickfont":{"color":null,"family":null,"size":0},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"gridcolor":null,"gridwidth":0,"title":{"text":"","font":{"color":null,"family":null,"size":0}},"hoverformat":".2f"},"annotations":[],"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":0.80000000000000004,"y0":0.80000000000000004,"y1":1},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":0.80000000000000004,"y0":0,"y1":0.80000000000000004},{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0.80000000000000004,"x1":1,"y0":0,"y1":0.80000000000000004}],"images":[],"margin":{"t":30,"r":null,"b":135.49190535491908,"l":135.49190535491908},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"y":1,"yanchor":"top"},"hovermode":"closest","barmode":"relative","paper_bgcolor":"rgba(255,255,255,1)","title":"Numerical Correlation Heatmap"},"attrs":{"33b8363338a3":{"x":{},"y":{},"xend":{},"yend":{},"colour":{},"linetype":{},"size":{},"type":"scatter"},"33b83e0f744":{"x":{},"y":{},"colour":{},"shape":{},"size":{}},"33b86023353f":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]},"33b8695058de":{"x":{},"y":{},"fill":{},"text":{},"type":"heatmap"},"33b81d5f630a":{"x":{},"y":{},"text":{},"customdata":{},"type":"scatter","mode":"text","textposition":"middle right","hovertemplate":"row: %{y}<br />column: %{x}<br />value: %{customdata}<extra><\/extra>","showlegend":false,"textfont":{"color":["rgba(255,255,255,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(255,255,255,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(255,255,255,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(255,255,255,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(0,0,0,1)","rgba(255,255,255,1)"],"size":12},"inherit":false},"33b8662c155a":{"x":{},"y":{},"xend":{},"yend":{},"colour":{},"linetype":{},"size":{},"type":"scatter"},"33b871e25e42":{"x":{},"y":{},"colour":{},"shape":{},"size":{}}},"source":"A","config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displaylogo":false,"modeBarButtonsToRemove":["sendDataToCloud","select2d","lasso2d","autoScale2d","hoverClosestCartesian","hoverCompareCartesian","sendDataToCloud"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"subplot":true,"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>Looks like there’s not really any correlation in the numerical
+data.</p>
+<p>Now let’s look at the <em>Cramér’s V</em> plot for the correlations
+between categorical data</p>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-c0a2727c5b52f21fb257" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-c0a2727c5b52f21fb257">{"x":{"data":[{"x":[1,2,3,4,5,6,7,8,9],"y":[1,2,3,4,5,6,7,8,9],"z":[[1,0.13643069323089407,0.019595356845796365,0.09621015599848351,0.12022621591137754,0.030973785943184146,0.1474967586754016,0.37389509685504363,0.26217800356034121],[0.13643069323089407,1,0.099032082725848819,0.11243936325704221,0.46298739975429898,0.20138542285496086,0.18038789218209969,0.20209239634973952,0.51151865861981083],[0.019595356845796365,0.099032082725848819,1,0.072438749596593494,0,0.091180851374201649,0.14228864503687813,0.12138498389151783,0.0030039711541103337],[0.09621015599848351,0.11243936325704221,0.072438749596593494,1,0.084670292584898124,0.12053104127008177,0.11458474337183974,0.061480865976013051,0.16876810265116926],[0.12022621591137754,0.46298739975429898,0,0.084670292584898124,1,0.2765858314897276,0.19287816188729043,0.31907333307014946,0.42055366683328677],[0.030973785943184146,0.20138542285496086,0.091180851374201649,0.12053104127008177,0.2765858314897276,1,0.1239433375854935,0.22913717264760516,0.38628611334775503],[0.1474967586754016,0.18038789218209969,0.14228864503687813,0.11458474337183974,0.19287816188729043,0.1239433375854935,1,0.14782330680251507,0.48732786556445973],[0.37389509685504363,0.20209239634973952,0.12138498389151783,0.061480865976013051,0.31907333307014946,0.22913717264760516,0.14782330680251507,1,0.52307269337139517],[0.26217800356034121,0.51151865861981083,0.0030039711541103337,0.16876810265116926,0.42055366683328677,0.38628611334775503,0.48732786556445973,0.52307269337139517,1]],"text":[["Var1: Sex<br />Var2: Sex<br />Freq: 1.00000000","Var1: ChestPainType<br />Var2: Sex<br />Freq: 0.15005033","Var1: FastingBloodSugar<br />Var2: Sex<br />Freq: 0.03505764","Var1: RestECG<br />Var2: Sex<br />Freq: 0.11046412","Var1: ExerciseAngina<br />Var2: Sex<br />Freq: 0.13410142","Var1: SegmentSlope<br />Var2: Sex<br />Freq: 0.04625662","Var1: MajorVesselsColored<br />Var2: Sex<br />Freq: 0.16094187","Var1: ThalassemiaType<br />Var2: Sex<br />Freq: 0.38376960","Var1: HeartAttack<br />Var2: Sex<br />Freq: 0.27381444"],["Var1: Sex<br />Var2: ChestPainType<br />Freq: 0.15005033","Var1: ChestPainType<br />Var2: ChestPainType<br />Freq: 1.00000000","Var1: FastingBloodSugar<br />Var2: ChestPainType<br />Freq: 0.11324155","Var1: RestECG<br />Var2: ChestPainType<br />Freq: 0.12643738","Var1: ExerciseAngina<br />Var2: ChestPainType<br />Freq: 0.47145680","Var1: SegmentSlope<br />Var2: ChestPainType<br />Freq: 0.21398064","Var1: MajorVesselsColored<br />Var2: ChestPainType<br />Freq: 0.19331427","Var1: ThalassemiaType<br />Var2: ChestPainType<br />Freq: 0.21467646","Var1: HeartAttack<br />Var2: ChestPainType<br />Freq: 0.51922266"],["Var1: Sex<br />Var2: FastingBloodSugar<br />Freq: 0.03505764","Var1: ChestPainType<br />Var2: FastingBloodSugar<br />Freq: 0.11324155","Var1: FastingBloodSugar<br />Var2: FastingBloodSugar<br />Freq: 1.00000000","Var1: RestECG<br />Var2: FastingBloodSugar<br />Freq: 0.08706763","Var1: ExerciseAngina<br />Var2: FastingBloodSugar<br />Freq: 0.01577133","Var1: SegmentSlope<br />Var2: FastingBloodSugar<br />Freq: 0.10551414","Var1: MajorVesselsColored<br />Var2: FastingBloodSugar<br />Freq: 0.15581589","Var1: ThalassemiaType<br />Var2: FastingBloodSugar<br />Freq: 0.13524191","Var1: HeartAttack<br />Var2: FastingBloodSugar<br />Freq: 0.01872793"],["Var1: Sex<br />Var2: RestECG<br />Freq: 0.11046412","Var1: ChestPainType<br />Var2: RestECG<br />Freq: 0.12643738","Var1: FastingBloodSugar<br />Var2: RestECG<br />Freq: 0.08706763","Var1: RestECG<br />Var2: RestECG<br />Freq: 1.00000000","Var1: ExerciseAngina<br />Var2: RestECG<br />Freq: 0.09910626","Var1: SegmentSlope<br />Var2: RestECG<br />Freq: 0.13440144","Var1: MajorVesselsColored<br />Var2: RestECG<br />Freq: 0.12854892","Var1: ThalassemiaType<br />Var2: RestECG<br />Freq: 0.07628256","Var1: HeartAttack<br />Var2: RestECG<br />Freq: 0.18187774"],["Var1: Sex<br />Var2: ExerciseAngina<br />Freq: 0.13410142","Var1: ChestPainType<br />Var2: ExerciseAngina<br />Freq: 0.47145680","Var1: FastingBloodSugar<br />Var2: ExerciseAngina<br />Freq: 0.01577133","Var1: RestECG<br />Var2: ExerciseAngina<br />Freq: 0.09910626","Var1: ExerciseAngina<br />Var2: ExerciseAngina<br />Freq: 1.00000000","Var1: SegmentSlope<br />Var2: ExerciseAngina<br />Freq: 0.28799504","Var1: MajorVesselsColored<br />Var2: ExerciseAngina<br />Freq: 0.20560755","Var1: ThalassemiaType<br />Var2: ExerciseAngina<br />Freq: 0.32981245","Var1: HeartAttack<br />Var2: ExerciseAngina<br />Freq: 0.42969231"],["Var1: Sex<br />Var2: SegmentSlope<br />Freq: 0.04625662","Var1: ChestPainType<br />Var2: SegmentSlope<br />Freq: 0.21398064","Var1: FastingBloodSugar<br />Var2: SegmentSlope<br />Freq: 0.10551414","Var1: RestECG<br />Var2: SegmentSlope<br />Freq: 0.13440144","Var1: ExerciseAngina<br />Var2: SegmentSlope<br />Freq: 0.28799504","Var1: SegmentSlope<br />Var2: SegmentSlope<br />Freq: 1.00000000","Var1: MajorVesselsColored<br />Var2: SegmentSlope<br />Freq: 0.13775992","Var1: ThalassemiaType<br />Var2: SegmentSlope<br />Freq: 0.24129471","Var1: HeartAttack<br />Var2: SegmentSlope<br />Freq: 0.39596520"],["Var1: Sex<br />Var2: MajorVesselsColored<br />Freq: 0.16094187","Var1: ChestPainType<br />Var2: MajorVesselsColored<br />Freq: 0.19331427","Var1: FastingBloodSugar<br />Var2: MajorVesselsColored<br />Freq: 0.15581589","Var1: RestECG<br />Var2: MajorVesselsColored<br />Freq: 0.12854892","Var1: ExerciseAngina<br />Var2: MajorVesselsColored<br />Freq: 0.20560755","Var1: SegmentSlope<br />Var2: MajorVesselsColored<br />Freq: 0.13775992","Var1: MajorVesselsColored<br />Var2: MajorVesselsColored<br />Freq: 1.00000000","Var1: ThalassemiaType<br />Var2: MajorVesselsColored<br />Freq: 0.16126327","Var1: HeartAttack<br />Var2: MajorVesselsColored<br />Freq: 0.49541339"],["Var1: Sex<br />Var2: ThalassemiaType<br />Freq: 0.38376960","Var1: ChestPainType<br />Var2: ThalassemiaType<br />Freq: 0.21467646","Var1: FastingBloodSugar<br />Var2: ThalassemiaType<br />Freq: 0.13524191","Var1: RestECG<br />Var2: ThalassemiaType<br />Freq: 0.07628256","Var1: ExerciseAngina<br />Var2: ThalassemiaType<br />Freq: 0.32981245","Var1: SegmentSlope<br />Var2: ThalassemiaType<br />Freq: 0.24129471","Var1: MajorVesselsColored<br />Var2: ThalassemiaType<br />Freq: 0.16126327","Var1: ThalassemiaType<br />Var2: ThalassemiaType<br />Freq: 1.00000000","Var1: HeartAttack<br />Var2: ThalassemiaType<br />Freq: 0.53059447"],["Var1: Sex<br />Var2: HeartAttack<br />Freq: 0.27381444","Var1: ChestPainType<br />Var2: HeartAttack<br />Freq: 0.51922266","Var1: FastingBloodSugar<br />Var2: HeartAttack<br />Freq: 0.01872793","Var1: RestECG<br />Var2: HeartAttack<br />Freq: 0.18187774","Var1: ExerciseAngina<br />Var2: HeartAttack<br />Freq: 0.42969231","Var1: SegmentSlope<br />Var2: HeartAttack<br />Freq: 0.39596520","Var1: MajorVesselsColored<br />Var2: HeartAttack<br />Freq: 0.49541339","Var1: ThalassemiaType<br />Var2: HeartAttack<br />Freq: 0.53059447","Var1: HeartAttack<br />Var2: HeartAttack<br />Freq: 1.00000000"]],"colorscale":[[0,"#FFFFFF"],[0.0030039711541103337,"#FEFFFF"],[0.019595356845796365,"#FCFCFE"],[0.030973785943184146,"#FAFBFD"],[0.061480865976013051,"#F4F7FA"],[0.072438749596593494,"#F2F5FA"],[0.084670292584898124,"#F0F4F9"],[0.091180851374201649,"#EFF3F8"],[0.09621015599848351,"#EEF2F8"],[0.099032082725848819,"#EEF2F8"],[0.11243936325704221,"#EBF0F7"],[0.11458474337183974,"#EBF0F6"],[0.12022621591137754,"#EAEFF6"],[0.12053104127008177,"#EAEFF6"],[0.12138498389151783,"#EAEFF6"],[0.1239433375854935,"#E9EFF6"],[0.13643069323089407,"#E7EDF5"],[0.14228864503687813,"#E6ECF4"],[0.1474967586754016,"#E5ECF4"],[0.14782330680251507,"#E5ECF4"],[0.16876810265116926,"#E1E9F2"],[0.18038789218209969,"#DFE7F1"],[0.19287816188729043,"#DDE6F0"],[0.20138542285496086,"#DCE5F0"],[0.20209239634973952,"#DCE4F0"],[0.22913717264760516,"#D7E1EE"],[0.26217800356034121,"#D1DDEB"],[0.2765858314897276,"#CFDBEA"],[0.31907333307014946,"#C7D5E7"],[0.37389509685504363,"#BDCEE3"],[0.38628611334775503,"#BBCDE2"],[0.42055366683328677,"#B5C8DF"],[0.46298739975429898,"#AEC3DC"],[0.48732786556445973,"#A9C0DA"],[0.51151865861981083,"#A5BDD8"],[0.52307269337139517,"#A3BCD8"],[1,"#4682B4"]],"type":"heatmap","showscale":false,"autocolorscale":false,"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9],"y":[1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8,8,9,9,9,9,9,9,9,9,9],"text":[1,0.14999999999999999,0.040000000000000001,0.11,0.13,0.050000000000000003,0.16,0.38,0.27000000000000002,0.14999999999999999,1,0.11,0.13,0.46999999999999997,0.20999999999999999,0.19,0.20999999999999999,0.52000000000000002,0.040000000000000001,0.11,1,0.089999999999999997,0.02,0.11,0.16,0.14000000000000001,0.02,0.11,0.13,0.089999999999999997,1,0.10000000000000001,0.13,0.13,0.080000000000000002,0.17999999999999999,0.13,0.46999999999999997,0.02,0.10000000000000001,1,0.28999999999999998,0.20999999999999999,0.33000000000000002,0.42999999999999999,0.050000000000000003,0.20999999999999999,0.11,0.13,0.28999999999999998,1,0.14000000000000001,0.23999999999999999,0.40000000000000002,0.16,0.19,0.16,0.13,0.20999999999999999,0.14000000000000001,1,0.16,0.5,0.38,0.20999999999999999,0.14000000000000001,0.080000000000000002,0.33000000000000002,0.23999999999999999,0.16,1,0.53000000000000003,0.27000000000000002,0.52000000000000002,0.02,0.17999999999999999,0.42999999999999999,0.40000000000000002,0.5,0.53000000000000003,1],"hovertext":["Var1: Sex<br />Var2: Sex<br />Freq: 1.00000000<br />round(Freq, 2): 1.00","Var1: ChestPainType<br />Var2: Sex<br />Freq: 0.15005033<br />round(Freq, 2): 0.15","Var1: FastingBloodSugar<br />Var2: Sex<br />Freq: 0.03505764<br />round(Freq, 2): 0.04","Var1: RestECG<br />Var2: Sex<br />Freq: 0.11046412<br />round(Freq, 2): 0.11","Var1: ExerciseAngina<br />Var2: Sex<br />Freq: 0.13410142<br />round(Freq, 2): 0.13","Var1: SegmentSlope<br />Var2: Sex<br />Freq: 0.04625662<br />round(Freq, 2): 0.05","Var1: MajorVesselsColored<br />Var2: Sex<br />Freq: 0.16094187<br />round(Freq, 2): 0.16","Var1: ThalassemiaType<br />Var2: Sex<br />Freq: 0.38376960<br />round(Freq, 2): 0.38","Var1: HeartAttack<br />Var2: Sex<br />Freq: 0.27381444<br />round(Freq, 2): 0.27","Var1: Sex<br />Var2: ChestPainType<br />Freq: 0.15005033<br />round(Freq, 2): 0.15","Var1: ChestPainType<br />Var2: ChestPainType<br />Freq: 1.00000000<br />round(Freq, 2): 1.00","Var1: FastingBloodSugar<br />Var2: ChestPainType<br />Freq: 0.11324155<br />round(Freq, 2): 0.11","Var1: RestECG<br />Var2: ChestPainType<br />Freq: 0.12643738<br />round(Freq, 2): 0.13","Var1: ExerciseAngina<br />Var2: ChestPainType<br />Freq: 0.47145680<br />round(Freq, 2): 0.47","Var1: SegmentSlope<br />Var2: ChestPainType<br />Freq: 0.21398064<br />round(Freq, 2): 0.21","Var1: MajorVesselsColored<br />Var2: ChestPainType<br />Freq: 0.19331427<br />round(Freq, 2): 0.19","Var1: ThalassemiaType<br />Var2: ChestPainType<br />Freq: 0.21467646<br />round(Freq, 2): 0.21","Var1: HeartAttack<br />Var2: ChestPainType<br />Freq: 0.51922266<br />round(Freq, 2): 0.52","Var1: Sex<br />Var2: FastingBloodSugar<br />Freq: 0.03505764<br />round(Freq, 2): 0.04","Var1: ChestPainType<br />Var2: FastingBloodSugar<br />Freq: 0.11324155<br />round(Freq, 2): 0.11","Var1: FastingBloodSugar<br />Var2: FastingBloodSugar<br />Freq: 1.00000000<br />round(Freq, 2): 1.00","Var1: RestECG<br />Var2: FastingBloodSugar<br />Freq: 0.08706763<br />round(Freq, 2): 0.09","Var1: ExerciseAngina<br />Var2: FastingBloodSugar<br />Freq: 0.01577133<br />round(Freq, 2): 0.02","Var1: SegmentSlope<br />Var2: FastingBloodSugar<br />Freq: 0.10551414<br />round(Freq, 2): 0.11","Var1: MajorVesselsColored<br />Var2: FastingBloodSugar<br />Freq: 0.15581589<br />round(Freq, 2): 0.16","Var1: ThalassemiaType<br />Var2: FastingBloodSugar<br />Freq: 0.13524191<br />round(Freq, 2): 0.14","Var1: HeartAttack<br />Var2: FastingBloodSugar<br />Freq: 0.01872793<br />round(Freq, 2): 0.02","Var1: Sex<br />Var2: RestECG<br />Freq: 0.11046412<br />round(Freq, 2): 0.11","Var1: ChestPainType<br />Var2: RestECG<br />Freq: 0.12643738<br />round(Freq, 2): 0.13","Var1: FastingBloodSugar<br />Var2: RestECG<br />Freq: 0.08706763<br />round(Freq, 2): 0.09","Var1: RestECG<br />Var2: RestECG<br />Freq: 1.00000000<br />round(Freq, 2): 1.00","Var1: ExerciseAngina<br />Var2: RestECG<br />Freq: 0.09910626<br />round(Freq, 2): 0.10","Var1: SegmentSlope<br />Var2: RestECG<br />Freq: 0.13440144<br />round(Freq, 2): 0.13","Var1: MajorVesselsColored<br />Var2: RestECG<br />Freq: 0.12854892<br />round(Freq, 2): 0.13","Var1: ThalassemiaType<br />Var2: RestECG<br />Freq: 0.07628256<br />round(Freq, 2): 0.08","Var1: HeartAttack<br />Var2: RestECG<br />Freq: 0.18187774<br />round(Freq, 2): 0.18","Var1: Sex<br />Var2: ExerciseAngina<br />Freq: 0.13410142<br />round(Freq, 2): 0.13","Var1: ChestPainType<br />Var2: ExerciseAngina<br />Freq: 0.47145680<br />round(Freq, 2): 0.47","Var1: FastingBloodSugar<br />Var2: ExerciseAngina<br />Freq: 0.01577133<br />round(Freq, 2): 0.02","Var1: RestECG<br />Var2: ExerciseAngina<br />Freq: 0.09910626<br />round(Freq, 2): 0.10","Var1: ExerciseAngina<br />Var2: ExerciseAngina<br />Freq: 1.00000000<br />round(Freq, 2): 1.00","Var1: SegmentSlope<br />Var2: ExerciseAngina<br />Freq: 0.28799504<br />round(Freq, 2): 0.29","Var1: MajorVesselsColored<br />Var2: ExerciseAngina<br />Freq: 0.20560755<br />round(Freq, 2): 0.21","Var1: ThalassemiaType<br />Var2: ExerciseAngina<br />Freq: 0.32981245<br />round(Freq, 2): 0.33","Var1: HeartAttack<br />Var2: ExerciseAngina<br />Freq: 0.42969231<br />round(Freq, 2): 0.43","Var1: Sex<br />Var2: SegmentSlope<br />Freq: 0.04625662<br />round(Freq, 2): 0.05","Var1: ChestPainType<br />Var2: SegmentSlope<br />Freq: 0.21398064<br />round(Freq, 2): 0.21","Var1: FastingBloodSugar<br />Var2: SegmentSlope<br />Freq: 0.10551414<br />round(Freq, 2): 0.11","Var1: RestECG<br />Var2: SegmentSlope<br />Freq: 0.13440144<br />round(Freq, 2): 0.13","Var1: ExerciseAngina<br />Var2: SegmentSlope<br />Freq: 0.28799504<br />round(Freq, 2): 0.29","Var1: SegmentSlope<br />Var2: SegmentSlope<br />Freq: 1.00000000<br />round(Freq, 2): 1.00","Var1: MajorVesselsColored<br />Var2: SegmentSlope<br />Freq: 0.13775992<br />round(Freq, 2): 0.14","Var1: ThalassemiaType<br />Var2: SegmentSlope<br />Freq: 0.24129471<br />round(Freq, 2): 0.24","Var1: HeartAttack<br />Var2: SegmentSlope<br />Freq: 0.39596520<br />round(Freq, 2): 0.40","Var1: Sex<br />Var2: MajorVesselsColored<br />Freq: 0.16094187<br />round(Freq, 2): 0.16","Var1: ChestPainType<br />Var2: MajorVesselsColored<br />Freq: 0.19331427<br />round(Freq, 2): 0.19","Var1: FastingBloodSugar<br />Var2: MajorVesselsColored<br />Freq: 0.15581589<br />round(Freq, 2): 0.16","Var1: RestECG<br />Var2: MajorVesselsColored<br />Freq: 0.12854892<br />round(Freq, 2): 0.13","Var1: ExerciseAngina<br />Var2: MajorVesselsColored<br />Freq: 0.20560755<br />round(Freq, 2): 0.21","Var1: SegmentSlope<br />Var2: MajorVesselsColored<br />Freq: 0.13775992<br />round(Freq, 2): 0.14","Var1: MajorVesselsColored<br />Var2: MajorVesselsColored<br />Freq: 1.00000000<br />round(Freq, 2): 1.00","Var1: ThalassemiaType<br />Var2: MajorVesselsColored<br />Freq: 0.16126327<br />round(Freq, 2): 0.16","Var1: HeartAttack<br />Var2: MajorVesselsColored<br />Freq: 0.49541339<br />round(Freq, 2): 0.50","Var1: Sex<br />Var2: ThalassemiaType<br />Freq: 0.38376960<br />round(Freq, 2): 0.38","Var1: ChestPainType<br />Var2: ThalassemiaType<br />Freq: 0.21467646<br />round(Freq, 2): 0.21","Var1: FastingBloodSugar<br />Var2: ThalassemiaType<br />Freq: 0.13524191<br />round(Freq, 2): 0.14","Var1: RestECG<br />Var2: ThalassemiaType<br />Freq: 0.07628256<br />round(Freq, 2): 0.08","Var1: ExerciseAngina<br />Var2: ThalassemiaType<br />Freq: 0.32981245<br />round(Freq, 2): 0.33","Var1: SegmentSlope<br />Var2: ThalassemiaType<br />Freq: 0.24129471<br />round(Freq, 2): 0.24","Var1: MajorVesselsColored<br />Var2: ThalassemiaType<br />Freq: 0.16126327<br />round(Freq, 2): 0.16","Var1: ThalassemiaType<br />Var2: ThalassemiaType<br />Freq: 1.00000000<br />round(Freq, 2): 1.00","Var1: HeartAttack<br />Var2: ThalassemiaType<br />Freq: 0.53059447<br />round(Freq, 2): 0.53","Var1: Sex<br />Var2: HeartAttack<br />Freq: 0.27381444<br />round(Freq, 2): 0.27","Var1: ChestPainType<br />Var2: HeartAttack<br />Freq: 0.51922266<br />round(Freq, 2): 0.52","Var1: FastingBloodSugar<br />Var2: HeartAttack<br />Freq: 0.01872793<br />round(Freq, 2): 0.02","Var1: RestECG<br />Var2: HeartAttack<br />Freq: 0.18187774<br />round(Freq, 2): 0.18","Var1: ExerciseAngina<br />Var2: HeartAttack<br />Freq: 0.42969231<br />round(Freq, 2): 0.43","Var1: SegmentSlope<br />Var2: HeartAttack<br />Freq: 0.39596520<br />round(Freq, 2): 0.40","Var1: MajorVesselsColored<br />Var2: HeartAttack<br />Freq: 0.49541339<br />round(Freq, 2): 0.50","Var1: ThalassemiaType<br />Var2: HeartAttack<br />Freq: 0.53059447<br />round(Freq, 2): 0.53","Var1: HeartAttack<br />Var2: HeartAttack<br />Freq: 1.00000000<br />round(Freq, 2): 1.00"],"textfont":{"size":14.66456692913386,"color":"rgba(0,0,0,1)"},"type":"scatter","mode":"text","hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1],"y":[1],"name":"67e2d1924327c478c3484183053f127c","type":"scatter","mode":"markers","opacity":0,"hoverinfo":"skip","showlegend":false,"marker":{"color":[0,1],"colorscale":[[0,"#FFFFFF"],[0.0033444816053511722,"#FEFFFF"],[0.006688963210702341,"#FEFEFE"],[0.01003344481605351,"#FDFEFE"],[0.013377926421404682,"#FDFDFE"],[0.016722408026755856,"#FCFDFE"],[0.020066889632107027,"#FBFCFD"],[0.023411371237458192,"#FBFCFD"],[0.026755852842809364,"#FAFBFD"],[0.030100334448160536,"#FAFBFD"],[0.033444816053511711,"#F9FBFC"],[0.036789297658862873,"#F9FAFC"],[0.040133779264214048,"#F8FAFC"],[0.043478260869565223,"#F7F9FC"],[0.046822742474916385,"#F7F9FB"],[0.05016722408026756,"#F6F8FB"],[0.053511705685618721,"#F6F8FB"],[0.056856187290969903,"#F5F7FB"],[0.060200668896321079,"#F4F7FA"],[0.06354515050167224,"#F4F7FA"],[0.066889632107023422,"#F3F6FA"],[0.070234113712374605,"#F3F6FA"],[0.073578595317725745,"#F2F5F9"],[0.076923076923076927,"#F2F5F9"],[0.08026755852842811,"#F1F4F9"],[0.083612040133779264,"#F0F4F9"],[0.086956521739130446,"#F0F4F8"],[0.090301003344481615,"#EFF3F8"],[0.093645484949832769,"#EFF3F8"],[0.096989966555183951,"#EEF2F8"],[0.10033444816053513,"#EDF2F7"],[0.1036789297658863,"#EDF1F7"],[0.10702341137123746,"#ECF1F7"],[0.11036789297658864,"#ECF0F7"],[0.11371237458193982,"#EBF0F6"],[0.11705685618729098,"#EAF0F6"],[0.12040133779264214,"#EAEFF6"],[0.12374581939799333,"#E9EFF6"],[0.12709030100334448,"#E9EEF5"],[0.13043478260869565,"#E8EEF5"],[0.13377926421404684,"#E8EDF5"],[0.13712374581939799,"#E7EDF5"],[0.14046822742474918,"#E6ECF4"],[0.14381270903010035,"#E6ECF4"],[0.14715719063545149,"#E5ECF4"],[0.15050167224080269,"#E5EBF4"],[0.15384615384615385,"#E4EBF3"],[0.15719063545150502,"#E3EAF3"],[0.16053511705685619,"#E3EAF3"],[0.16387959866220736,"#E2E9F3"],[0.16722408026755853,"#E2E9F2"],[0.1705685618729097,"#E1E9F2"],[0.17391304347826089,"#E1E8F2"],[0.17725752508361203,"#E0E8F2"],[0.1806020066889632,"#DFE7F1"],[0.1839464882943144,"#DFE7F1"],[0.18729096989966554,"#DEE6F1"],[0.19063545150501671,"#DEE6F1"],[0.1939799331103679,"#DDE5F0"],[0.19732441471571907,"#DCE5F0"],[0.20066889632107024,"#DCE5F0"],[0.20401337792642141,"#DBE4F0"],[0.20735785953177258,"#DBE4EF"],[0.21070234113712374,"#DAE3EF"],[0.21404682274247491,"#D9E3EF"],[0.21739130434782611,"#D9E2EF"],[0.22073578595317725,"#D8E2EE"],[0.22408026755852842,"#D8E2EE"],[0.22742474916387961,"#D7E1EE"],[0.23076923076923075,"#D7E1EE"],[0.23411371237458195,"#D6E0ED"],[0.23745819397993312,"#D5E0ED"],[0.24080267558528431,"#D5DFED"],[0.24414715719063546,"#D4DFED"],[0.24749163879598662,"#D4DFEC"],[0.25083612040133779,"#D3DEEC"],[0.25418060200668896,"#D2DEEC"],[0.25752508361204013,"#D2DDEC"],[0.2608695652173913,"#D1DDEB"],[0.26421404682274252,"#D1DCEB"],[0.26755852842809369,"#D0DCEB"],[0.2709030100334448,"#D0DCEB"],[0.27424749163879597,"#CFDBEA"],[0.27759197324414714,"#CEDBEA"],[0.28093645484949836,"#CEDAEA"],[0.28428093645484953,"#CDDAEA"],[0.2876254180602007,"#CDD9E9"],[0.29096989966555181,"#CCD9E9"],[0.29431438127090298,"#CBD9E9"],[0.2976588628762542,"#CBD8E9"],[0.30100334448160537,"#CAD8E8"],[0.30434782608695654,"#CAD7E8"],[0.30769230769230771,"#C9D7E8"],[0.31103678929765882,"#C8D6E8"],[0.31438127090301005,"#C8D6E7"],[0.31772575250836121,"#C7D6E7"],[0.32107023411371238,"#C7D5E7"],[0.32441471571906355,"#C6D5E7"],[0.32775919732441472,"#C6D4E6"],[0.33110367892976594,"#C5D4E6"],[0.33444816053511706,"#C4D3E6"],[0.33779264214046822,"#C4D3E6"],[0.34113712374581939,"#C3D3E5"],[0.34448160535117056,"#C3D2E5"],[0.34782608695652178,"#C2D2E5"],[0.35117056856187295,"#C1D1E5"],[0.35451505016722407,"#C1D1E4"],[0.35785953177257523,"#C0D0E4"],[0.3612040133779264,"#C0D0E4"],[0.36454849498327763,"#BFD0E4"],[0.3678929765886288,"#BFCFE3"],[0.37123745819397996,"#BECFE3"],[0.37458193979933108,"#BDCEE3"],[0.37792642140468224,"#BDCEE3"],[0.38127090301003341,"#BCCDE2"],[0.38461538461538464,"#BCCDE2"],[0.38795986622073581,"#BBCDE2"],[0.39130434782608697,"#BACCE2"],[0.39464882943143814,"#BACCE1"],[0.39799331103678925,"#B9CBE1"],[0.40133779264214048,"#B9CBE1"],[0.40468227424749165,"#B8CAE0"],[0.40802675585284282,"#B7CAE0"],[0.41137123745819398,"#B7CAE0"],[0.41471571906354515,"#B6C9E0"],[0.41806020066889632,"#B6C9DF"],[0.42140468227424749,"#B5C8DF"],[0.42474916387959866,"#B5C8DF"],[0.42809364548494983,"#B4C7DF"],[0.43143812709030099,"#B3C7DE"],[0.43478260869565222,"#B3C7DE"],[0.43812709030100339,"#B2C6DE"],[0.4414715719063545,"#B2C6DE"],[0.44481605351170567,"#B1C5DD"],[0.44816053511705684,"#B0C5DD"],[0.45150501672240806,"#B0C5DD"],[0.45484949832775923,"#AFC4DD"],[0.4581939799331104,"#AFC4DC"],[0.46153846153846151,"#AEC3DC"],[0.46488294314381268,"#ADC3DC"],[0.4682274247491639,"#ADC2DC"],[0.47157190635451507,"#ACC2DB"],[0.47491638795986624,"#ACC2DB"],[0.47826086956521741,"#ABC1DB"],[0.48160535117056857,"#AAC1DB"],[0.48494983277591974,"#AAC0DA"],[0.48829431438127091,"#A9C0DA"],[0.49163879598662208,"#A9BFDA"],[0.49498327759197319,"#A8BFDA"],[0.49832775919732442,"#A7BFD9"],[0.50167224080267558,"#A7BED9"],[0.50501672240802664,"#A6BED9"],[0.50836120401337792,"#A6BDD9"],[0.5117056856187292,"#A5BDD8"],[0.51505016722408026,"#A5BDD8"],[0.51839464882943143,"#A4BCD8"],[0.52173913043478259,"#A3BCD8"],[0.52508361204013376,"#A3BBD7"],[0.52842809364548504,"#A2BBD7"],[0.5317725752508361,"#A2BAD7"],[0.53511705685618738,"#A1BAD7"],[0.53846153846153844,"#A0BAD6"],[0.5418060200668896,"#A0B9D6"],[0.54515050167224088,"#9FB9D6"],[0.54849498327759194,"#9FB8D6"],[0.55183946488294322,"#9EB8D5"],[0.55518394648829428,"#9DB8D5"],[0.55852842809364545,"#9DB7D5"],[0.56187290969899673,"#9CB7D5"],[0.56521739130434778,"#9CB6D4"],[0.56856187290969906,"#9BB6D4"],[0.57190635451505012,"#9AB5D4"],[0.5752508361204014,"#9AB5D4"],[0.57859531772575257,"#99B5D3"],[0.58193979933110362,"#99B4D3"],[0.5852842809364549,"#98B4D3"],[0.58862876254180596,"#97B3D3"],[0.59197324414715724,"#97B3D2"],[0.59531772575250841,"#96B3D2"],[0.59866220735785958,"#96B2D2"],[0.60200668896321075,"#95B2D2"],[0.6053511705685618,"#94B1D1"],[0.60869565217391308,"#94B1D1"],[0.61204013377926425,"#93B0D1"],[0.61538461538461542,"#93B0D1"],[0.61872909698996659,"#92B0D0"],[0.62207357859531764,"#91AFD0"],[0.62541806020066892,"#91AFD0"],[0.62876254180602009,"#90AED0"],[0.63210702341137126,"#90AECF"],[0.63545150501672243,"#8FAECF"],[0.6387959866220736,"#8EADCF"],[0.64214046822742477,"#8EADCF"],[0.64548494983277593,"#8DACCE"],[0.6488294314381271,"#8CACCE"],[0.65217391304347827,"#8CACCE"],[0.65551839464882944,"#8BABCE"],[0.65886287625418061,"#8BABCD"],[0.66220735785953189,"#8AAACD"],[0.66555183946488294,"#89AACD"],[0.66889632107023411,"#89A9CD"],[0.67224080267558528,"#88A9CC"],[0.67558528428093645,"#88A9CC"],[0.67892976588628773,"#87A8CC"],[0.68227424749163879,"#86A8CC"],[0.68561872909698995,"#86A7CB"],[0.68896321070234112,"#85A7CB"],[0.69230769230769229,"#84A7CB"],[0.69565217391304357,"#84A6CB"],[0.69899665551839463,"#83A6CA"],[0.70234113712374591,"#83A5CA"],[0.70568561872909696,"#82A5CA"],[0.70903010033444813,"#81A5CA"],[0.71237458193979941,"#81A4C9"],[0.71571906354515047,"#80A4C9"],[0.71906354515050175,"#80A3C9"],[0.72240802675585281,"#7FA3C9"],[0.72575250836120409,"#7EA3C8"],[0.72909698996655525,"#7EA2C8"],[0.73244147157190631,"#7DA2C8"],[0.73578595317725759,"#7CA1C8"],[0.73913043478260865,"#7CA1C7"],[0.74247491638795993,"#7BA1C7"],[0.7458193979933111,"#7BA0C7"],[0.74916387959866215,"#7AA0C7"],[0.75250836120401343,"#799FC6"],[0.75585284280936449,"#799FC6"],[0.75919732441471577,"#789FC6"],[0.76254180602006683,"#779EC6"],[0.76588628762541811,"#779EC5"],[0.76923076923076927,"#769DC5"],[0.77257525083612033,"#759DC5"],[0.77591973244147161,"#759CC5"],[0.77926421404682267,"#749CC4"],[0.78260869565217395,"#749CC4"],[0.78595317725752512,"#739BC4"],[0.78929765886287628,"#729BC4"],[0.79264214046822745,"#729AC3"],[0.79598662207357851,"#719AC3"],[0.79933110367892979,"#709AC3"],[0.80267558528428096,"#7099C3"],[0.80602006688963213,"#6F99C2"],[0.80936454849498329,"#6E98C2"],[0.81270903010033446,"#6E98C2"],[0.81605351170568563,"#6D98C2"],[0.8193979933110368,"#6C97C1"],[0.82274247491638797,"#6C97C1"],[0.82608695652173914,"#6B96C1"],[0.8294314381270903,"#6A96C1"],[0.83277591973244147,"#6A96C0"],[0.83612040133779264,"#6995C0"],[0.83946488294314381,"#6895C0"],[0.84280936454849498,"#6894C0"],[0.84615384615384615,"#6794BF"],[0.84949832775919731,"#6794BF"],[0.85284280936454859,"#6693BF"],[0.85618729096989965,"#6593BF"],[0.85953177257525082,"#6492BE"],[0.86287625418060199,"#6492BE"],[0.86622073578595316,"#6392BE"],[0.86956521739130443,"#6291BE"],[0.87290969899665549,"#6291BD"],[0.87625418060200677,"#6191BD"],[0.87959866220735783,"#6090BD"],[0.882943143812709,"#6090BD"],[0.88628762541806028,"#5F8FBC"],[0.88963210702341133,"#5E8FBC"],[0.89297658862876261,"#5E8FBC"],[0.89632107023411367,"#5D8EBC"],[0.89966555183946484,"#5C8EBB"],[0.90301003344481612,"#5C8DBB"],[0.90635451505016718,"#5B8DBB"],[0.90969899665551845,"#5A8DBB"],[0.91304347826086951,"#598CBA"],[0.91638795986622079,"#598CBA"],[0.91973244147157196,"#588BBA"],[0.92307692307692302,"#578BBA"],[0.9264214046822743,"#578BB9"],[0.92976588628762535,"#568AB9"],[0.93311036789297663,"#558AB9"],[0.9364548494983278,"#5489B9"],[0.93979933110367897,"#5489B8"],[0.94314381270903014,"#5389B8"],[0.9464882943143812,"#5288B8"],[0.94983277591973247,"#5288B8"],[0.95317725752508364,"#5187B7"],[0.95652173913043481,"#5087B7"],[0.95986622073578598,"#4F87B7"],[0.96321070234113715,"#4F86B7"],[0.96655518394648832,"#4E86B6"],[0.96989966555183948,"#4D85B6"],[0.97324414715719065,"#4C85B6"],[0.97658862876254182,"#4C85B6"],[0.97993311036789299,"#4B84B5"],[0.98327759197324416,"#4A84B5"],[0.98662207357859533,"#4984B5"],[0.98996655518394649,"#4883B5"],[0.99331103678929766,"#4883B4"],[0.99665551839464883,"#4782B4"],[1,"#4682B4"]],"colorbar":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"thickness":23.039999999999996,"title":"Cramér's V","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"tickmode":"array","ticktext":["0.25","0.50","0.75","1.00"],"tickvals":[0.2388553548119616,0.49201468098575213,0.74517400715954274,0.99833333333333329],"tickfont":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"ticklen":2,"len":0.5}},"xaxis":"x","yaxis":"y","frame":null}],"layout":{"margin":{"t":43.762557077625573,"r":7.3059360730593621,"b":72.540712354251411,"l":122.00913242009135},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Cramér's V Plot","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,9.5999999999999996],"tickmode":"array","ticktext":["Sex","ChestPainType","FastingBloodSugar","RestECG","ExerciseAngina","SegmentSlope","MajorVesselsColored","ThalassemiaType","HeartAttack"],"tickvals":[1,2,3,4,5,6,6.9999999999999991,8,9],"categoryorder":"array","categoryarray":["Sex","ChestPainType","FastingBloodSugar","RestECG","ExerciseAngina","SegmentSlope","MajorVesselsColored","ThalassemiaType","HeartAttack"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-45,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,9.5999999999999996],"tickmode":"array","ticktext":["Sex","ChestPainType","FastingBloodSugar","RestECG","ExerciseAngina","SegmentSlope","MajorVesselsColored","ThalassemiaType","HeartAttack"],"tickvals":[1,2,3,4,5,6,6.9999999999999991,8,9],"categoryorder":"array","categoryarray":["Sex","ChestPainType","FastingBloodSugar","RestECG","ExerciseAngina","SegmentSlope","MajorVesselsColored","ThalassemiaType","HeartAttack"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Cramér's V","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"33b86cea44fc":{"x":{},"y":{},"fill":{},"type":"heatmap"},"33b8588366d":{"x":{},"y":{},"fill":{},"label":{}}},"cur_data":"33b86cea44fc","visdat":{"33b86cea44fc":["function (y) ","x"],"33b8588366d":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>From the <em>Cramér’s V plot</em>, it is evident that there is a
+correlation between the risk of heart attack and the <strong>type of
+chest pain experienced, the number of major vessels colored by
+fluoroscopy, and the type of Thalassemia</strong>. Specifically, the
+risk of heart attack appears to be related to whether a person has
+typical angina, atypical angina, non-anginal pain, or is asymptomatic.
+Similarly, the risk of heart attack is also associated with the number
+of major vessels colored by fluoroscopy, and whether a person has normal
+Thalassemia, a fixed defect, a reversible defect, or Thalassemia.</p>
+</div>
+<div id="statistical-analysis" class="section level1">
+<h1>Statistical Analysis</h1>
+<p>Next, we will see the the relationship between the risk of heart
+attack and different types of chest pain</p>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-f7d2e8b31b3adad66762" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-f7d2e8b31b3adad66762">{"x":{"visdat":{"33b86820658a":["function () ","plotlyVisDat"]},"cur_data":"33b86820658a","attrs":{"33b86820658a":{"x":{},"title":"The Effect of Chest Pain Types (ChestPainType) on Risk of Heart Attack (HeartAttack)","textauto":true,"color":{},"colors":["#48a890","#234457"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"histogram"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"group","bargap":0.10000000000000001,"xaxis":{"domain":[0,1],"automargin":true,"title":"Chest Pain Types","tickvals":[0,1,2,3],"ticktext":["Typical Angina (0)","Atypical Angina (1)","Non-Anginal Pain (2)","Asymptomatic (3)"],"showgrid":true,"gridcolor":"lightgray"},"yaxis":{"domain":[0,1],"automargin":true,"showgrid":true,"gridcolor":"lightgray"},"plot_bgcolor":"white","paper_bgcolor":"white","hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["0","0","0","0","0","2","1","1","2","0","0","0","2","0","0","0","0","0","2","0","0","0","0","2","0","0","0","0","0","2","0","2","0","0","0","0","0","0","2","0","0","0","0","2","0","2","0","0","0","0","0","2","0","0","0","0","0","3","0","0","0","1","0","3","2","2","0","0","0","0","0","0","0","0","0","2","0","0","0","0","0","0","1","1","2","0","0","0","0","3","0","0","0","0","3","0","0","0","0","0","0","0","2","0","0","0","3","0","0","0","0","0","1","1","0","0","0","2","0","0","0","3","1","0","0","0","0","0","2","0","0","0","0","0","3","0","0","1"],"title":"The Effect of Chest Pain Types (ChestPainType) on Risk of Heart Attack (HeartAttack)","textauto":true,"type":"histogram","name":"0","marker":{"color":"rgba(72,168,144,1)","line":{"color":"rgba(72,168,144,1)"}},"textfont":{"color":"rgba(72,168,144,1)"},"error_y":{"color":"rgba(72,168,144,1)"},"error_x":{"color":"rgba(72,168,144,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["3","2","1","1","0","0","1","1","2","2","0","2","1","3","3","2","2","3","0","3","0","2","0","2","3","1","2","2","2","2","1","0","1","2","3","2","2","2","2","2","2","1","0","0","2","1","2","2","2","0","2","0","2","2","2","1","0","0","3","0","2","1","3","1","2","0","2","1","1","0","2","2","1","0","2","1","2","1","1","2","2","1","2","3","0","2","2","1","2","0","2","0","2","1","1","0","0","0","2","2","3","3","1","2","2","2","3","0","1","0","0","2","2","0","1","2","2","3","1","0","0","0","2","2","2","1","0","2","2","1","2","1","1","1","1","0","2","1","0","0","2","0","2","0","2","1","2","3","2","2","0","0","3","2","2","0","2","1","1","1","1","1","1","2","2"],"title":"The Effect of Chest Pain Types (ChestPainType) on Risk of Heart Attack (HeartAttack)","textauto":true,"type":"histogram","name":"1","marker":{"color":"rgba(35,68,87,1)","line":{"color":"rgba(35,68,87,1)"}},"textfont":{"color":"rgba(35,68,87,1)"},"error_y":{"color":"rgba(35,68,87,1)"},"error_x":{"color":"rgba(35,68,87,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>Here, we can see that people with <strong>chest pain type 1 (Atypical
+Angina)</strong> are more prone to heart attacks.</p>
+<p>Next we’ll see the connection between the risk of having a heart
+attack and the number of major vessels colored by fluoroscopy.</p>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-5ec0ae09582f4414a9e0" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-5ec0ae09582f4414a9e0">{"x":{"visdat":{"33b874bf314":["function () ","plotlyVisDat"]},"cur_data":"33b874bf314","attrs":{"33b874bf314":{"x":{},"title":"The Effect of CAA (MajorVesselsColored) on Risk of Heart Attack (HeartAttack)","textauto":true,"color":{},"colors":["#48a890","#234457"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"histogram"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"group","bargap":0.10000000000000001,"xaxis":{"domain":[0,1],"automargin":true,"title":"CAA","tickvals":[0,1,2,3,4],"ticktext":["0","1","2","3","4"],"showgrid":true,"gridcolor":"lightgray"},"yaxis":{"domain":[0,1],"automargin":true,"showgrid":true,"gridcolor":"lightgray"},"plot_bgcolor":"white","paper_bgcolor":"white","hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["3","2","2","1","0","1","0","0","2","2","0","2","0","0","1","1","3","0","1","0","1","1","1","1","0","0","3","1","2","0","0","0","2","2","2","1","1","0","0","3","1","1","2","3","1","1","1","0","0","1","0","1","3","1","2","3","0","1","2","1","0","1","0","0","0","0","3","1","1","3","0","2","2","3","0","1","0","2","1","1","0","2","3","1","3","3","4","3","2","0","3","2","0","0","0","2","1","2","2","1","1","0","3","2","0","0","2","0","1","1","2","1","0","2","1","0","0","1","0","1","2","2","1","1","1","1","3","2","0","0","2","0","2","0","0","2","1","1"],"title":"The Effect of CAA (MajorVesselsColored) on Risk of Heart Attack (HeartAttack)","textauto":true,"type":"histogram","name":"0","marker":{"color":"rgba(72,168,144,1)","line":{"color":"rgba(72,168,144,1)"}},"textfont":{"color":"rgba(72,168,144,1)"},"error_y":{"color":"rgba(72,168,144,1)"},"error_x":{"color":"rgba(72,168,144,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","2","0","0","0","0","0","2","0","0","1","0","1","0","0","1","1","0","0","0","0","0","1","0","0","0","0","0","0","0","0","0","0","0","3","0","0","1","0","0","0","1","1","0","0","0","0","0","0","0","0","0","0","1","0","0","0","0","0","0","0","0","0","0","1","0","0","0","1","0","0","0","2","0","4","1","0","0","0","3","1","3","2","0","2","0","0","0","1","0","0","0","0","1","0","0","0","0","0","0","0","0","2","0","0","0","0","0","0","1","0","1","1","0","0","0","0","0","0","0","0","1","0","0","0","2","0","0","1","0","0","0","0","0","0","1","0","0","0","0","4","0","0","0","0","4","4"],"title":"The Effect of CAA (MajorVesselsColored) on Risk of Heart Attack (HeartAttack)","textauto":true,"type":"histogram","name":"1","marker":{"color":"rgba(35,68,87,1)","line":{"color":"rgba(35,68,87,1)"}},"textfont":{"color":"rgba(35,68,87,1)"},"error_y":{"color":"rgba(35,68,87,1)"},"error_x":{"color":"rgba(35,68,87,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>In this case, it appears that individuals who have a
+<strong>fluoroscopy result showing no major vessels colored (a CAA value
+of 0)</strong> are more susceptible to heart attacks.</p>
+<p>And lastly, we’ll see the relationship between the risk of heart
+attack and the type of thalassemia.</p>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-ab592b27b9faf5787fad" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-ab592b27b9faf5787fad">{"x":{"visdat":{"33b862517eab":["function () ","plotlyVisDat"]},"cur_data":"33b862517eab","attrs":{"33b862517eab":{"x":{},"title":"The Effect of Thalassemia Type (ThalassemiaType) on Risk of Heart Attack (HeartAttack)","textauto":true,"color":{},"colors":["#48a890","#234457"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"histogram"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"group","bargap":0.10000000000000001,"xaxis":{"domain":[0,1],"automargin":true,"title":"Thalassemia Type","tickvals":[0,1,2,3],"ticktext":["Normal (0)","Fixed Defect (1)","Reversible Defect (2)","Thalassemia (3)"],"showgrid":true,"gridcolor":"lightgray"},"yaxis":{"domain":[0,1],"automargin":true,"showgrid":true,"gridcolor":"lightgray"},"plot_bgcolor":"white","paper_bgcolor":"white","hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["2","3","2","3","3","1","3","2","3","3","3","3","2","3","1","3","3","2","3","3","2","3","3","3","3","3","3","3","3","2","3","2","3","3","1","2","3","3","3","3","3","3","3","3","3","3","3","3","3","2","3","3","3","3","3","3","3","2","3","3","3","3","3","3","3","2","3","3","2","2","3","3","3","2","3","3","2","1","3","1","3","3","1","3","3","3","3","2","2","2","3","3","3","2","3","3","2","3","2","2","2","2","2","2","3","3","2","2","3","2","3","3","3","2","2","1","0","1","3","3","3","2","2","3","3","3","1","1","3","1","3","2","1","3","3","3","3","2"],"title":"The Effect of Thalassemia Type (ThalassemiaType) on Risk of Heart Attack (HeartAttack)","textauto":true,"type":"histogram","name":"0","marker":{"color":"rgba(72,168,144,1)","line":{"color":"rgba(72,168,144,1)"}},"textfont":{"color":"rgba(72,168,144,1)"},"error_y":{"color":"rgba(72,168,144,1)"},"error_x":{"color":"rgba(72,168,144,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["1","2","2","2","2","1","2","3","3","2","2","2","2","2","2","2","2","2","2","2","3","2","2","2","3","2","2","2","2","2","2","3","2","2","2","2","2","3","2","2","2","2","2","2","2","2","2","2","0","2","2","2","3","2","2","2","2","2","2","2","2","3","1","1","2","2","2","2","2","2","3","3","2","2","2","2","2","2","2","3","2","2","2","3","2","3","3","3","2","2","2","3","2","2","2","3","2","3","2","2","2","3","2","3","2","2","2","2","2","2","2","3","3","3","2","2","2","3","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","1","3","2","2","2","2","2","2","2","2","2","2","1","2","3","2","2","2","2","2","3","3","2","2","2","2","2"],"title":"The Effect of Thalassemia Type (ThalassemiaType) on Risk of Heart Attack (HeartAttack)","textauto":true,"type":"histogram","name":"1","marker":{"color":"rgba(35,68,87,1)","line":{"color":"rgba(35,68,87,1)"}},"textfont":{"color":"rgba(35,68,87,1)"},"error_y":{"color":"rgba(35,68,87,1)"},"error_x":{"color":"rgba(35,68,87,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>From this observation, it seems that individuals with
+<strong>Thalassemia type 2</strong>, also known as a <strong>Reversible
+Defect</strong>, show a higher susceptibility to heart attacks.</p>
+</div>
+<div id="discussion" class="section level1">
+<h1>Discussion</h1>
+<p>The analysis reveals several noteworthy associations between various
+factors and the risk of heart attacks. Firstly, a negative correlation
+is observed between max heart exercise and segment depression,
+indicating an inverse relationship between these variables. Secondly,
+individuals experiencing Atypical Angina (chest pain type 1) appear to
+be more susceptible to heart attacks, suggesting the importance of
+considering chest pain type as a predictive factor. Additionally, those
+with a major vessels colored (CAA) value of 0 demonstrate heightened
+vulnerability to heart attacks, indicating a potential link between the
+absence or lower count of major vessels colored and increased risk.
+Lastly, individuals with Thalassemia type 2 (Reversible Defect) exhibit
+a higher likelihood of heart attacks, underscoring the significance of
+Thalassemia type in assessing cardiac health. These findings shed light
+on potential risk factors and underline the importance of comprehensive
+evaluation and management strategies to mitigate the risk of heart
+attacks.</p>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>In conclusion, our analysis of the <strong>“Heart Attack Analysis
+&amp; Prediction Dataset”</strong> has led to some significant findings
+that can contribute to the early detection and prevention of heart
+attacks. We have identified that individuals with <em>chest pain type 1
+(Atypical Angina)</em>, those with a <em>fluoroscopy result showing no
+major vessels colored (a CAA value of 0)</em>, and individuals with
+<em>Thalassemia type 2 (Reversible Defect)</em> are more prone to heart
+attacks.</p>
+<p>These findings not only enhance our understanding of the key
+predictors of heart attacks but also emphasize the importance of early
+detection and intervention. By identifying these risk factors, we can
+provide timely medical attention and lifestyle guidance to those most at
+risk, thereby reducing the global mortality rate from heart attacks.</p>
+<p>Moreover, these insights further underline the necessity for
+<strong>public health initiatives focused on heart disease prevention
+and education</strong>. By increasing public awareness about these risk
+factors, we can empower individuals to seek medical advice and adopt
+healthier lifestyles.</p>
+<p>Overall, our analysis aligns with the third goal of the
+<strong>Sustainable Development Goals (SDG)</strong> - ensuring healthy
+lives and promoting well-being for all ages. By focusing on heart
+disease, we are contributing to reducing the global burden of
+cardiovascular diseases and moving one step closer to achieving this
+significant goal.</p>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<ul>
+<li><a
+href="https://www.bhf.org.uk/what-we-do/news-from-the-bhf/news-archive/2018/february/every-minute-counts-when-it-comes-to-heart-attack-treatment"
+class="uri">https://www.bhf.org.uk/what-we-do/news-from-the-bhf/news-archive/2018/february/every-minute-counts-when-it-comes-to-heart-attack-treatment</a></li>
+<li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6192063/"
+class="uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6192063/</a></li>
+<li><a
+href="https://www.webmd.com/heart-disease/heart-failure/early-diagnosis-heart-failure#"
+class="uri">https://www.webmd.com/heart-disease/heart-failure/early-diagnosis-heart-failure#</a>:~:text=The%20sooner%20that%20you%20know,and%20prevent%20other%20health%20issues</li>
+<li><a
+href="https://www.heartfoundation.org.au/your-heart/evidence-and-statistics/key-statistics-heart-attack"
+class="uri">https://www.heartfoundation.org.au/your-heart/evidence-and-statistics/key-statistics-heart-attack</a></li>
+<li><a
+href="https://www.mayoclinic.org/diseases-conditions/thalassemia/symptoms-causes/syc-20354995"
+class="uri">https://www.mayoclinic.org/diseases-conditions/thalassemia/symptoms-causes/syc-20354995</a></li>
+<li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2253710/"
+class="uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2253710/</a></li>
+<li><a
+href="https://www.projectpro.io/recipes/find-count-of-missing-values-dataframe"
+class="uri">https://www.projectpro.io/recipes/find-count-of-missing-values-dataframe</a></li>
+<li><a
+href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/duplicated"
+class="uri">https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/duplicated</a></li>
+<li><a
+href="https://www.kaggle.com/code/abraamsaid/heart-attack-eda-ann"
+class="uri">https://www.kaggle.com/code/abraamsaid/heart-attack-eda-ann</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
